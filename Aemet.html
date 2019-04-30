@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'> 
+  <script src="js/jquery-3.3.1.js"></script>
+</head>
+<body>
+    <div class="card" style="width: 18rem;">
+        <img id="incendios" src="" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"> Riesgo de incendio en la peninsula:</h5>
+          <a href="http://www.aemet.es/es/portada" class="btn btn-primary">Mas datos</a>
+        </div>
+    </div>
+    <div id="">
+        <a id="climatologico" href="" class="btn btn-primary">NVDI desde satelite</a>
+    </div>
+      
+  
+<script>
+  $(document).ready(function () {
+    var api_key="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2hpdGExNDVAZ21haWwuY29tIiwianRpIjoiZTg0MTRlMjctMjQyZS00ZGFiLWIwN2ItZWRlMjk0MzYyNDY5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE1NTY1MjAxNTksInVzZXJJZCI6ImU4NDE0ZTI3LTI0MmUtNGRhYi1iMDdiLWVkZTI5NDM2MjQ2OSIsInJvbGUiOiIifQ.-mtSZQ-I3H0hOFWTdja5hLxwyPbjQdyAa2E5MaT28uw"
+
+    var satelite = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://opendata.aemet.es/opendata/api/satelites/producto/nvdi?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2hpdGExNDVAZ21haWwuY29tIiwianRpIjoiZTg0MTRlMjctMjQyZS00ZGFiLWIwN2ItZWRlMjk0MzYyNDY5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE1NTY1MjAxNTksInVzZXJJZCI6ImU4NDE0ZTI3LTI0MmUtNGRhYi1iMDdiLWVkZTI5NDM2MjQ2OSIsInJvbGUiOiIifQ.-mtSZQ-I3H0hOFWTdja5hLxwyPbjQdyAa2E5MaT28uw",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache"
+    }
+  }
+    var incendio = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://opendata.aemet.es/opendata/api/incendios/mapasriesgo/estimado/area/p?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2hpdGExNDVAZ21haWwuY29tIiwianRpIjoiZTg0MTRlMjctMjQyZS00ZGFiLWIwN2ItZWRlMjk0MzYyNDY5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE1NTY1MjAxNTksInVzZXJJZCI6ImU4NDE0ZTI3LTI0MmUtNGRhYi1iMDdiLWVkZTI5NDM2MjQ2OSIsInJvbGUiOiIifQ.-mtSZQ-I3H0hOFWTdja5hLxwyPbjQdyAa2E5MaT28uw",
+      "method": "GET",
+      "headers": {
+        "cache-control": "no-cache"
+    } 
+  }
+  $.ajax(incendio).done(function (incendioPeninsula){
+    console.log("incendios");
+    console.log(incendioPeninsula);
+
+    $("#incendios").attr('src', incendioPeninsula.datos);
+  })
+
+  $.ajax(satelite).done(function (datosSat) {
+    console.log("climatologico");
+    console.log(datosSat);
+
+    $("#climatologico").attr('href',datosSat.datos);
+    });
+  
+  
+
+})
+  
+</script> 
+</body>
+</html>
